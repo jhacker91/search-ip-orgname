@@ -1,6 +1,12 @@
 # search-ip-orgname
 Search ip ( or ip with detailed info) from organization name
 
+# before start
+
+Add information in "chiavi.py". All you need to do is to go on Censys to take UID and SECRET key of your API.
+IF YOU DON'T WRITE YOUR API IN "CHIAVI.PY" THE SCRIPT DON'T WORK
+
+
 # usage
 
 search-ip-orgname.py --ip example.com
