@@ -7,6 +7,7 @@ import chiavi
 import argparse
 
 print("****************************")
+print("OUTPUT Dettagliato: IP, LOCATION COUNTRY, COUTRYCODE, (AS)AUTONOMOUS-SYSTEM-ASN, AS-NAME, AS-COUNTRYCODE, AS-DESCRIPTION")
 print("search-ip-orgname.py [-h] [--ip | --desc] name")
 print("(--ip) consente di stampare solo ip mentre (--desc) permette di stampare ip con descrizione")
 print("****************************")
@@ -53,19 +54,14 @@ if args.ip:
         time.sleep(0.5)
         params = {
             "query": "443.https.tls.certificate.parsed.issuer.organization: " + data,
-            "page": p
+            "page": p,
+            "fields": ['ip']
         }
         res = requests.post(API_URL + "/search/ipv4", json=params, auth=(UID, SECRET))
         p = p + 1
         n = 0
         payload = res.json()
-
-
-        if "results" in payload:
-            for ip in payload['results']:
-                if "ip" in payload['results'][n]:
-                    print(payload['results'][n]["ip"])
-                    n += 1
+        print(payload)
 
 if args.desc:
     while p <= pages:
@@ -82,21 +78,4 @@ if args.desc:
         p = p + 1
         n = 0
         payload = res.json()
-
-        if "results" in payload:
-            for ip in payload['results']:
-                if "ip" in payload['results'][n]:
-                    print(payload['results'][n]["ip"])
-                if "location.country" in payload['results'][n]:
-                    print(payload['results'][n]["location.country"])
-                if "location.country_code" in payload['results'][n]:
-                    print(payload['results'][n]["location.country_code"])
-                if "autonomous_system.asn" in payload['results'][n]:
-                    print(payload['results'][n]["autonomous_system.asn"])
-                if "autonomous_system.country_code" in payload['results'][n]:
-                    print(payload['results'][n]["autonomous_system.country_code"])
-                if "autonomous_system.description" in payload['results'][n]:
-                    print(payload['results'][n]["autonomous_system.description"])
-                if "autonomous_system.name" in payload['results'][n]:
-                    print(payload['results'][n]["autonomous_system.name"])
-                n = n+1
+        print(payload)
