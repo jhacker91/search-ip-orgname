@@ -1,2 +1,2 @@
 # search-ip-orgname
-Search ip ( or ip whit detailed info) from organization name
+Search ip ( or ip with detailed info) from organization name
